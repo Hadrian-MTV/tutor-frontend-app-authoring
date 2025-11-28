@@ -16,7 +16,9 @@ const slice = createSlice({
       courseCreatorSavingStatus: '',
       deleteNotificationSavingStatus: '',
     },
-    studioHomeData: {},
+    studioHomeData: {
+      hasLeadershipAccess: false,
+    },
     studioHomeCoursesRequestParams: {
       currentPage: 1,
       search: undefined,
