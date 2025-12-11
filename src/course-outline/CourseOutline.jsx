@@ -155,6 +155,11 @@ const CourseOutline = ({ courseId }) => {
 
   const enableProctoredExams = useSelector(getProctoredExamsFlag);
 
+  const onClickPublishContent = (revokeCertificates) => {
+    handlePublishItemSubmit(revokeCertificates);
+    closePublishModal();
+  };
+
   /**
    * Move section to new index
    * @param {any} currentIndex
@@ -477,7 +482,7 @@ const CourseOutline = ({ courseId }) => {
         <PublishModal
           isOpen={isPublishModalOpen}
           onClose={closePublishModal}
-          onPublishSubmit={handlePublishItemSubmit}
+          onPublishSubmit={onClickPublishContent}
         />
         <ConfigureModal
           isOpen={isConfigureModalOpen}

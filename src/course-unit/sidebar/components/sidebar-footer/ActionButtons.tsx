@@ -6,10 +6,13 @@ import { Divider } from '../../../../generic/divider';
 import { getCanEdit, getCourseUnitData } from '../../../data/selectors';
 import { useClipboard } from '../../../../generic/clipboard';
 import messages from '../../messages';
+import PublishModal from '../../../../course-outline/publish-modal/PublishModal';
+import { useCourseOutline } from '../../../../course-outline/hooks';
+import { getCourseId } from '../../../data/selectors';
 
 interface ActionButtonsProps {
   openDiscardModal: () => void,
-  handlePublishing: () => void,
+  handlePublishing: (revokeCertificates: boolean) => void,
 }
 
 const ActionButtons = ({
@@ -25,6 +28,12 @@ const ActionButtons = ({
   } = useSelector(getCourseUnitData);
   const canEdit = useSelector(getCanEdit);
   const { copyToClipboard } = useClipboard();
+  const courseId = useSelector(getCourseId);
+  const { isPublishModalOpen, closePublishModal, openPublishModal } = useCourseOutline({ courseId });
+  const onClickPublish = (revokeCertificates) => {
+    handlePublishing(revokeCertificates);
+    closePublishModal();
+  }
 
   return (
     <>
@@ -33,11 +42,16 @@ const ActionButtons = ({
           size="sm"
           className="mt-3.5"
           variant="outline-primary"
-          onClick={handlePublishing}
+          onClick={openPublishModal}
         >
           {intl.formatMessage(messages.actionButtonPublishTitle)}
         </Button>
       )}
+      <PublishModal
+        isOpen={isPublishModalOpen}
+        onClose={closePublishModal}
+        onPublishSubmit={onClickPublish}
+      />
       {(published && hasChanges) && (
         <Button
           size="sm"

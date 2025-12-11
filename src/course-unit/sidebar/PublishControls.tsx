@@ -49,8 +49,9 @@ const PublishControls = ({ blockId }: PublishControlsProps) => {
     ));
   };
 
-  const handleCourseUnitPublish = () => {
-    dispatch(editCourseUnitVisibilityAndData(blockId, PUBLISH_TYPES.makePublic));
+  const handleCourseUnitPublish = (revokeCertificates) => {
+    dispatch(editCourseUnitVisibilityAndData(blockId, PUBLISH_TYPES.makePublic,
+      undefined, undefined, undefined, undefined, revokeCertificates));
   };
 
   return (
