@@ -1,5 +1,6 @@
 // @ts-check
 import React, { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getConfig } from '@edx/frontend-platform';
 import { useIntl } from '@edx/frontend-platform/i18n';
@@ -64,6 +65,7 @@ const CardHeader = ({
   const [titleValue, setTitleValue] = useState(title);
   const cardHeaderRef = useRef(null);
   const [isManageTagsDrawerOpen, openManageTagsDrawer, closeManageTagsDrawer] = useToggle(false);
+  const hasLeadershipAccess = useSelector(state => state.studioHome.studioHomeData.hasLeadershipAccess);
 
   // Use studio url as base if proctoringExamConfigurationLink is a relative link
   const fullProctoringExamConfigurationLink = () => (
@@ -142,7 +144,7 @@ const CardHeader = ({
                 onClick={onClickSync}
               />
             )}
-            <IconButton
+            {!hasLeadershipAccess && (<IconButton
               className="item-card-button-icon"
               data-testid={`${namePrefix}-edit-button`}
               alt={intl.formatMessage(messages.altButtonEdit)}
@@ -150,7 +152,7 @@ const CardHeader = ({
               onClick={onClickEdit}
               // @ts-ignore
               disabled={isDisabledEditField}
-            />
+            />)}
           </>
         )}
         <div className="ml-auto d-flex">
@@ -161,7 +163,7 @@ const CardHeader = ({
             <TagCount count={contentTagCount} onClick={openManageTagsDrawer} />
           )}
           {extraActionsComponent}
-          <Dropdown data-testid={`${namePrefix}-card-header__menu`} onClick={onClickMenuButton}>
+          {!hasLeadershipAccess && (<Dropdown data-testid={`${namePrefix}-card-header__menu`} onClick={onClickMenuButton}>
             <Dropdown.Toggle
               className="item-card-header__menu"
               id={`${namePrefix}-card-header__menu`}
@@ -248,7 +250,7 @@ const CardHeader = ({
                 </Dropdown.Item>
               )}
             </Dropdown.Menu>
-          </Dropdown>
+          </Dropdown>)}
         </div>
       </div>
       <ContentTagsDrawerSheet
