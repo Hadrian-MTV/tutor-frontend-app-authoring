@@ -206,10 +206,11 @@ export async function updateCourseSectionHighlights(sectionId, highlights) {
  * @param {string} sectionId
  * @returns {Promise<Object>}
  */
-export async function publishCourseSection(sectionId) {
+export async function publishCourseSection(sectionId, revokeCertificates) {
   const { data } = await getAuthenticatedHttpClient()
     .post(getCourseItemApiUrl(sectionId), {
       publish: 'make_public',
+      revoke_certificates: revokeCertificates,
     });
 
   return data;

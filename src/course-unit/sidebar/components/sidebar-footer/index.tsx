@@ -10,7 +10,7 @@ interface SidebarFooterProps {
   displayUnitLocation?: boolean,
   openDiscardModal: () => void,
   openVisibleModal: () => void,
-  handlePublishing: () => void,
+  handlePublishing: (revokeCertificates: boolean) => void,
   visibleToStaffOnly: boolean,
 }
 

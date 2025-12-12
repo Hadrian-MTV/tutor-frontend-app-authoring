@@ -230,13 +230,13 @@ export function updateCourseSectionHighlightsQuery(sectionId, highlights) {
   };
 }
 
-export function publishCourseItemQuery(itemId, sectionId) {
+export function publishCourseItemQuery(itemId, sectionId, revokeCertificates) {
   return async (dispatch) => {
     dispatch(updateSavingStatus({ status: RequestStatus.PENDING }));
     dispatch(showProcessingNotification(NOTIFICATION_MESSAGES.saving));
 
     try {
-      await publishCourseSection(itemId).then(async (result) => {
+      await publishCourseSection(itemId, revokeCertificates).then(async (result) => {
         if (result) {
           await dispatch(fetchCourseSectionQuery([sectionId]));
           dispatch(hideProcessingNotification());

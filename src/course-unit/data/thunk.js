@@ -126,6 +126,7 @@ export function editCourseUnitVisibilityAndData(
   groupAccess,
   isDiscussionEnabled,
   callback,
+  revokeCertificates,
   blockId = itemId,
 ) {
   return async (dispatch) => {
@@ -141,6 +142,7 @@ export function editCourseUnitVisibilityAndData(
         isVisible,
         groupAccess,
         isDiscussionEnabled,
+        revokeCertificates
       ).then(async (result) => {
         if (result) {
           if (callback) {

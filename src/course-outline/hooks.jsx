@@ -174,9 +174,8 @@ const useCourseOutline = ({ courseId }) => {
     closeHighlightsModal();
   };
 
-  const handlePublishItemSubmit = () => {
-    dispatch(publishCourseItemQuery(currentItem.id, currentSection.id));
-
+  const handlePublishItemSubmit = (revokeCertificates) => {
+    dispatch(publishCourseItemQuery(currentItem.id, currentSection.id, revokeCertificates));
     closePublishModal();
   };
 

@@ -17,6 +17,10 @@ const messages = defineMessages({
     id: 'course-authoring.course-outline.publish-modal.button.label',
     defaultMessage: 'Publish',
   },
+  revokeCertificatesLabel: {
+    id: 'course-authoring.course-outline.publish-modal.revoke-certificates-label',
+    defaultMessage: 'Revoke Existing Certificate',
+  },
 });
 
 export default messages;

@@ -104,8 +104,9 @@ export async function createCourseXblock({
  * @param {boolean} isDiscussionEnabled - Indicates whether the discussion feature is enabled.
  * @returns {Promise<any>} A promise that resolves with the response data.
  */
-export async function handleCourseUnitVisibilityAndData(unitId, type, isVisible, groupAccess, isDiscussionEnabled) {
+export async function handleCourseUnitVisibilityAndData(unitId, type, isVisible, groupAccess, isDiscussionEnabled, revokeCertificates = false) {
   const body = {
+    revoke_certificates: revokeCertificates,
     publish: groupAccess ? null : type,
     ...(type === PUBLISH_TYPES.republish ? {
       metadata: {
